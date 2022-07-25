@@ -164,12 +164,17 @@ class Point:
         return valid_adjacent
 
 
-def create_points(input):
-    q = [l for l in input.split('\n') if l != ""]
+def create_points(input) -> List[Point]:
+    q = [line for line in input.split('\n') if line != ""]
     row_length = len(q[0])
     Point.row_length = row_length
     points = []
     formatted_input = re.sub(pattern=r"\D", string=input, repl="")
+
+    # ad hoc make points out of the top row
+
+    # ad hoc make poitns out of the bottom row
+
 
     for n, char in enumerate(formatted_input):
         try:
