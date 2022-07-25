@@ -134,13 +134,13 @@ class Point:
 
         self.height = int(height)
 
-    def all_adjacent_are_higher(self):
+    def all_adjacent_are_higher(self) -> bool:
         nearby_heights = []
-        nearby_heights += [int(self.up)] if self.up else []
-        nearby_heights += [int(self.down)] if self.down else []
+        nearby_heights += [int(self.up.height)] if self.up else []
+        nearby_heights += [int(self.down.height)] if self.down else []
 
-        nearby_heights += [int(self.left)] if self.left else []
-        nearby_heights += [int(self.right)] if self.right else []
+        nearby_heights += [int(self.left.height)] if self.left else []
+        nearby_heights += [int(self.right.height)] if self.right else []
 
         return all([h > self.height for h in nearby_heights])
 
@@ -163,7 +163,7 @@ class Point:
     def valid_adjacent_tiles(self, already_mapped_tiles=None):
         if already_mapped_tiles is None:
             already_mapped_tiles = []
-        valid_adjacent = [link for link in [self.up_link, self.down_link, self.left_link, self.right_link] if
+        valid_adjacent = [link for link in [self.up, self.down, self.left, self.right] if
                           link is not None and link.height != 9 and link not in already_mapped_tiles]
         return valid_adjacent
 
@@ -182,26 +182,21 @@ def create_points(input) -> List[Point]:
     for y, row in enumerate(rows):
 
         for x, cell in enumerate(row):
-            coordinate_dict[(x, y)] = cell
+            coordinate_dict[(x, y)] = Point(up=None,down=None,left=None,right=None, height=cell,uuid=(x,y))
 
     Point.coordinate = coordinate_dict
     points: List[Point] = []
-    for key, value in coordinate_dict.items():
+    for key, point in coordinate_dict.items():
         x, y = key
 
-        up = None if y == 0 else coordinate_dict[x, y - 1]
-        down = None if y == (coordinate_y-1) else coordinate_dict[x, y + 1]
+        point.up = None if y == 0 else coordinate_dict[x, y - 1]
+        point.down = None if y == (coordinate_y-1) else coordinate_dict[x, y + 1]
 
-        left = None if x == 0 else coordinate_dict[x - 1, y]
-        right = None if x == (coordinate_x - 1) else coordinate_dict[x + 1, y]
+        point.left = None if x == 0 else coordinate_dict[x - 1, y]
+        point.right = None if x == (coordinate_x - 1) else coordinate_dict[x + 1, y]
 
-        p = Point(up=up, down=down, left=left, right=right, height=value, uuid=key)
-        points.append(p)
 
-    for p in points:
-        p.add_links(points)
-
-    return points
+    return list( coordinate_dict.values() )
 
 
 def get_lowest_points(input):
@@ -239,7 +234,6 @@ def find_basins(input):
 
     basin_sizes.sort()
     print(basin_sizes[-1] * basin_sizes[-2] * basin_sizes[-3])
-
 
 if __name__ == '__main__':
     get_lowest_points(test_input)
