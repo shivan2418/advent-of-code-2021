@@ -116,6 +116,7 @@ input = '''
 
 class Point:
     row_length = None
+    coordinate = {}
 
     def __str__(self):
         return f"{self.height}"
@@ -144,10 +145,13 @@ class Point:
         return all([h > self.height for h in nearby_heights])
 
     def add_links(self, points: List['Point']):
-        self.up_link = points[self.uuid - Point.row_length] if self.up else None
-        self.down_link = points[self.uuid + Point.row_length] if self.down else None
-        self.left_link = points[self.uuid - 1] if self.left else None
-        self.right_link = points[self.uuid + 1] if self.right else None
+        x, y = self.uuid
+
+        self.up_link = Point.coordinate[(x, y - 1)] if self.up else None
+        self.down_link = Point.coordinate[(x, y + 1)] if self.down else None
+
+        self.right_link = Point.coordinate[(x + 1, y)] if self.right else None
+        self.left_link = Point.coordinate[(x - 1, y)] if self.left else None
 
     def get_all_adjacent_links(self):
         return [link for link in [self.up_link, self.down_link, self.left_link, self.right_link] if link is not None]
@@ -165,38 +169,34 @@ class Point:
 
 
 def create_points(input) -> List[Point]:
-    q = [line for line in input.split('\n') if line != ""]
-    row_length = len(q[0])
-    Point.row_length = row_length
-    points = []
+    rows = [line for line in input.split('\n') if line != ""]
+
+    coordinate_x = len(rows[0])
+    coordinate_y = len(rows)
+
+    Point.row_length = coordinate_x
     formatted_input = re.sub(pattern=r"\D", string=input, repl="")
 
-    # ad hoc make points out of the top row
+    coordinate_dict = {}
 
-    # ad hoc make poitns out of the bottom row
+    for y, row in enumerate(rows):
 
+        for x, cell in enumerate(row):
+            coordinate_dict[(x, y)] = cell
 
-    for n, char in enumerate(formatted_input):
-        try:
-            left = formatted_input[n - 1] if n % Point.row_length != 0 else None
-        except:
-            left = None
-        try:
-            right = formatted_input[n + 1]
-            if n % Point.row_length-1 == 0 and n != 0:
-                right = None
-        except:
-            right = None
-        try:
-            up = formatted_input[n - Point.row_length] if n - Point.row_length >= 0 else None
-        except:
-            up = None
-        try:
-            down = formatted_input[n + Point.row_length]
-        except:
-            down = None
+    Point.coordinate = coordinate_dict
+    points: List[Point] = []
+    for key, value in coordinate_dict.items():
+        x, y = key
 
-        points.append(Point(up, down, left, right, char, n))
+        up = None if y == 0 else coordinate_dict[x, y - 1]
+        down = None if y == (coordinate_y-1) else coordinate_dict[x, y + 1]
+
+        left = None if x == 0 else coordinate_dict[x - 1, y]
+        right = None if x == (coordinate_x - 1) else coordinate_dict[x + 1, y]
+
+        p = Point(up=up, down=down, left=left, right=right, height=value, uuid=key)
+        points.append(p)
 
     for p in points:
         p.add_links(points)
