@@ -1,0 +1,16 @@
+C:\Users\emil\source\repos\Day3\Day3\obj\Debug\net5.0\Advent of Code.csproj.AssemblyReference.cache
+C:\Users\emil\source\repos\Day3\Day3\obj\Debug\net5.0\Advent of Code.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\emil\source\repos\Day3\Day3\obj\Debug\net5.0\Advent of Code.AssemblyInfoInputs.cache
+C:\Users\emil\source\repos\Day3\Day3\obj\Debug\net5.0\Advent of Code.AssemblyInfo.cs
+C:\Users\emil\source\repos\Day3\Day3\obj\Debug\net5.0\Advent of Code.csproj.CoreCompileInputs.cache
+C:\Users\emil\source\repos\Day3\Day3\bin\Debug\net5.0\Advent of Code.exe
+C:\Users\emil\source\repos\Day3\Day3\bin\Debug\net5.0\Advent of Code.deps.json
+C:\Users\emil\source\repos\Day3\Day3\bin\Debug\net5.0\Advent of Code.runtimeconfig.json
+C:\Users\emil\source\repos\Day3\Day3\bin\Debug\net5.0\Advent of Code.runtimeconfig.dev.json
+C:\Users\emil\source\repos\Day3\Day3\bin\Debug\net5.0\Advent of Code.dll
+C:\Users\emil\source\repos\Day3\Day3\bin\Debug\net5.0\Advent of Code.pdb
+C:\Users\emil\source\repos\Day3\Day3\obj\Debug\net5.0\Advent of Code.dll
+C:\Users\emil\source\repos\Day3\Day3\obj\Debug\net5.0\refint\Advent of Code.dll
+C:\Users\emil\source\repos\Day3\Day3\obj\Debug\net5.0\Advent of Code.pdb
+C:\Users\emil\source\repos\Day3\Day3\obj\Debug\net5.0\Advent of Code.genruntimeconfig.cache
+C:\Users\emil\source\repos\Day3\Day3\obj\Debug\net5.0\ref\Advent of Code.dll

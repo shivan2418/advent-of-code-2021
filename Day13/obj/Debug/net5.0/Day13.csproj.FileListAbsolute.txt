@@ -1,0 +1,16 @@
+C:\Users\emil\source\repos\Advent of Code\Day13\bin\Debug\net5.0\Day13.exe
+C:\Users\emil\source\repos\Advent of Code\Day13\bin\Debug\net5.0\Day13.deps.json
+C:\Users\emil\source\repos\Advent of Code\Day13\bin\Debug\net5.0\Day13.runtimeconfig.json
+C:\Users\emil\source\repos\Advent of Code\Day13\bin\Debug\net5.0\Day13.runtimeconfig.dev.json
+C:\Users\emil\source\repos\Advent of Code\Day13\bin\Debug\net5.0\Day13.dll
+C:\Users\emil\source\repos\Advent of Code\Day13\bin\Debug\net5.0\Day13.pdb
+C:\Users\emil\source\repos\Advent of Code\Day13\obj\Debug\net5.0\Day13.csproj.AssemblyReference.cache
+C:\Users\emil\source\repos\Advent of Code\Day13\obj\Debug\net5.0\Day13.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\emil\source\repos\Advent of Code\Day13\obj\Debug\net5.0\Day13.AssemblyInfoInputs.cache
+C:\Users\emil\source\repos\Advent of Code\Day13\obj\Debug\net5.0\Day13.AssemblyInfo.cs
+C:\Users\emil\source\repos\Advent of Code\Day13\obj\Debug\net5.0\Day13.csproj.CoreCompileInputs.cache
+C:\Users\emil\source\repos\Advent of Code\Day13\obj\Debug\net5.0\Day13.dll
+C:\Users\emil\source\repos\Advent of Code\Day13\obj\Debug\net5.0\refint\Day13.dll
+C:\Users\emil\source\repos\Advent of Code\Day13\obj\Debug\net5.0\Day13.pdb
+C:\Users\emil\source\repos\Advent of Code\Day13\obj\Debug\net5.0\Day13.genruntimeconfig.cache
+C:\Users\emil\source\repos\Advent of Code\Day13\obj\Debug\net5.0\ref\Day13.dll

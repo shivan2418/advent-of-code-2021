@@ -1,0 +1,16 @@
+C:\Users\emil\source\repos\Day3\Day3\bin\Debug\net5.0\Day3.exe
+C:\Users\emil\source\repos\Day3\Day3\bin\Debug\net5.0\Day3.deps.json
+C:\Users\emil\source\repos\Day3\Day3\bin\Debug\net5.0\Day3.runtimeconfig.json
+C:\Users\emil\source\repos\Day3\Day3\bin\Debug\net5.0\Day3.runtimeconfig.dev.json
+C:\Users\emil\source\repos\Day3\Day3\bin\Debug\net5.0\Day3.dll
+C:\Users\emil\source\repos\Day3\Day3\bin\Debug\net5.0\Day3.pdb
+C:\Users\emil\source\repos\Day3\Day3\obj\Debug\net5.0\Day3.csproj.AssemblyReference.cache
+C:\Users\emil\source\repos\Day3\Day3\obj\Debug\net5.0\Day3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\emil\source\repos\Day3\Day3\obj\Debug\net5.0\Day3.AssemblyInfoInputs.cache
+C:\Users\emil\source\repos\Day3\Day3\obj\Debug\net5.0\Day3.AssemblyInfo.cs
+C:\Users\emil\source\repos\Day3\Day3\obj\Debug\net5.0\Day3.csproj.CoreCompileInputs.cache
+C:\Users\emil\source\repos\Day3\Day3\obj\Debug\net5.0\Day3.dll
+C:\Users\emil\source\repos\Day3\Day3\obj\Debug\net5.0\refint\Day3.dll
+C:\Users\emil\source\repos\Day3\Day3\obj\Debug\net5.0\Day3.pdb
+C:\Users\emil\source\repos\Day3\Day3\obj\Debug\net5.0\Day3.genruntimeconfig.cache
+C:\Users\emil\source\repos\Day3\Day3\obj\Debug\net5.0\ref\Day3.dll
