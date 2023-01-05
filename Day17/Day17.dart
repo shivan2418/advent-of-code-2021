@@ -1,6 +1,9 @@
 import 'dart:io';
 import "dart:math";
 
+String velocities = """23,-10 25,-9 27,-5 29,-6 22,-6 21,-7 9,0 27,-7 24,-5 25,-7 26,-6 25,-5 6,8 11,-2 20,-5 29,-10 6,3 28,-7 8,0 30,-6 29,-8 20,-10 6,7 6,4 6,1 14,-4 21,-6 26,-10 7,-1 7,7 8,-1 21,-9 6,2 20,-7 30,-10 14,-3 20,-8 13,-2 7,3 28,-8 29,-9 15,-3 22,-5 26,-8 25,-8 25,-6 15,-4 9,-2 15,-2 12,-2 28,-9 12,-3 24,-6 23,-7 25,-10 7,8 11,-3 26,-7 7,1 23,-9 6,0 22,-10 27,-6 8,1 22,-8 13,-4 7,6 28,-6 11,-4 12,-4 26,-9 7,4 24,-10 23,-8 30,-8 7,0 9,-1 10,-1 26,-5 22,-9 6,5 7,5 23,-6 28,-10 10,-2 11,-1 20,-9 14,-2 29,-7 13,-3 23,-5 24,-8 27,-9 30,-7 28,-5 21,-10 7,9 6,6 21,-5 27,-10 7,2 30,-9 21,-8 22,-7 24,-9 20,-6 6,9 29,-5 8,-2 27,-8 30,-5 24,-7""";
+
+
 int test_x_min = 20;
 int test_x_max = 30;
 int test_y_min = -10;
@@ -72,10 +75,7 @@ class Probe {
   }
 
   bool on_target(){
-    return (this.x >= this.target_x_min &&
-        this.x <= this.target_x_max &&
-        this.y >= this.target_y_min &&
-        this.y <= this.target_y_max);
+    return ( (this.x >= this.target_x_min && this.x <= this.target_x_max) && (this.y >= this.target_y_min &&  this.y <= this.target_y_max));
   }
 
   void step({bool draw = true}) {
@@ -107,6 +107,15 @@ int factorial(int vec){
   return sum;
 }
 
+List<int> height_passed(int vec){
+  List<int> height_passed = [];
+  for (int i=0; i < 100; i++){
+    height_passed.add(vec);
+    vec--;
+  }
+  return height_passed;
+}
+
 void solve({ required int target_min_x, required int target_max_x, required int target_min_y, required int target_max_y}){
 
   // try various combinations
@@ -117,7 +126,7 @@ void solve({ required int target_min_x, required int target_max_x, required int 
   possible_x_values = possible_x_values.where((number) => (factorial(number) >= target_min_x && factorial(number) <= target_max_x) ).toList();
   print(possible_x_values);
 
-  List<int> possible_y_values = List.generate(1000, (index) => index+3);
+  List<int> possible_y_values = List.generate(1000, (index) => index-500);
 
   List<Probe> probes = [];
 
@@ -143,7 +152,7 @@ void solve({ required int target_min_x, required int target_max_x, required int 
 }
 
 bool test_launch(Probe probe, int max_x, int min_y){
-  while (probe.x < max_x && probe.y > min_y) {
+  while (probe.x < max_x && probe.y >= min_y) {
     probe.step(draw:false);
     if (probe.on_target()){
       return true;
@@ -152,7 +161,56 @@ bool test_launch(Probe probe, int max_x, int min_y){
   return false;
 }
 
+void evaluate_velocities({ required int target_min_x, required int target_max_x, required int target_min_y, required int target_max_y}) {
+
+  List<List<String>> velos = parse_velocities();
+  List<List<int>> possible_velos = [];
+
+  velos.forEach((element) {
+    int x = int.parse(element[0]);
+    int y = int.parse(element[1]);
+
+    if (factorial(x) >= target_min_x && factorial(x) <=target_max_x){
+      possible_velos.add([x,y]);
+    }
+
+    var final_list = [];
+
+    possible_velos.forEach((velo) {
+      int vx = velo[0];
+      int vy = velo[1];
+      int y = 0;
+      while(y > target_min_y){
+        if (y >= target_min_y && y <= target_max_y){
+          final_list.add([x,y]);
+          break;
+        }
+        y += vy;
+        vy-=1;
+      }
+
+
+    });
+
+    print(final_list);
+
+  });
+
+  print(possible_velos);
+
+
+}
+
+dynamic parse_velocities(){
+    var v = velocities.split(" ");
+    var numbers = v.map( (String element)=> element.split(',')).toList();
+
+    return numbers;
+}
+
 void main() {
+
+
   solve(target_min_x: test_x_min,
       target_max_x: test_x_max,
       target_min_y: test_y_min,
@@ -162,4 +220,10 @@ void main() {
       target_max_x: 292,
       target_min_y: -68,
       target_max_y: -44);
+
+    evaluate_velocities(target_min_x: 269,
+      target_max_x: 292,
+      target_min_y: -68,
+      target_max_y: -44);
+
 }
