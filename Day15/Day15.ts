@@ -1,4 +1,7 @@
 import Node from './node';
+import PriorityQueue  from 'priorityqueue';
+
+const queue = new PriorityQueue({comparator: (a:Node, b:Node) => b.distance_from_start - a.distance_from_start});
 
 const _ = require('lodash');
 
@@ -179,7 +182,7 @@ function parse_input(input: string): Node[] {
 
     let nodes: Node[] = [];
 
-    let node_map = new Map<[number,number],Node>();
+    let node_map = new Map();
 
     let x = 0;
     let y = 0;
@@ -192,12 +195,17 @@ function parse_input(input: string): Node[] {
             let cost = parseInt(char);
             let node = new Node(x, y, cost);
             nodes.push(node);
-            node_map.set([x,y], node);
             x++;
         });
         y++;
         x = 0;
     });
+
+
+    nodes.forEach( (node) => {
+        let key = `${node.x}-${node.y}`;
+        node_map.set(key, node);
+    })
 
     _.first(nodes)!.start = true;
     _.first(nodes)!.cost = 0;
@@ -220,10 +228,13 @@ function parse_input(input: string): Node[] {
 
 function solve(input: string) {
 
+    let visited = 0;
 
     let nodes = parse_input(input);
     // start at the start node
     let current_node = nodes.find(node => node.start)!;
+
+    queue.push(current_node);
 
     while (!current_node?.end) {
         let nodes_to_check = current_node.get_unvisited_neighbors();
@@ -234,11 +245,15 @@ function solve(input: string) {
             if (dist_from_start < node.distance_from_start) {
                 node.distance_from_start = dist_from_start;
                 node.previous_node = current_node;
+                queue.push(node);
             }
-
         })
+
         current_node.visited = true;
-        current_node = Node.get_next_node_to_visit(nodes)!;
+        visited++;
+        console.log(`visited% ${visited/nodes.length}`);
+
+        current_node = queue.pop();
 
         if (current_node.end) {
             break
