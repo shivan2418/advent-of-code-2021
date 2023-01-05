@@ -114,6 +114,70 @@ const input = "71359124119127989328713913228899415446452111122881839691915886655
     "2199395612171271152392819795216311991115818792511159521265359573629956281827812821311719715781738737\n" +
     "2126356321322111185843117549923315199213385946175489294117624711949445499157452371358923199949713123";
 
+
+function get_value(char:number|string){
+    if (char>9) {
+        char = 1;
+    }
+    return char;
+
+}
+
+function enlarge_map(input:string) {
+
+    let org_rows = input.split("\n");
+    let rows_side:string[][] = [];
+
+    let rows_down:string[][] = [];
+
+
+    // pad to the side
+    org_rows.forEach((row, i) => {
+
+        let new_row = Array.from(row);
+        let index = 0;
+        while (new_row.length < row.length*5) {
+
+            let char = new_row[index];
+            let value = parseInt(char) + 1;
+            if (value > 9) {
+                value = 1;
+            }
+            new_row.push(String(value));
+            index++;
+        }
+
+        rows_side.push(new_row);
+        })
+
+    // pad values down
+    let row_index =0;
+    let target_length = rows_side.length*5;
+    while (rows_side.length < target_length) {
+
+        let new_row:string[] = [];
+        rows_side[row_index].forEach((char, i) => {
+            let value = parseInt(char) + 1;
+            if (value > 9) {
+                value = 1;
+            }
+            new_row.push(String(value));
+        });
+        rows_side.push(new_row);
+        row_index++;
+
+    }
+
+    const combined = rows_side.concat(rows_down);
+    let output = "";
+    combined.forEach((row, i) => {
+        output += row.join("") + "\n";
+    })
+
+    return output;
+
+}
+
 function parse_input(input: string): Node[] {
 
     let nodes: Node[] = [];
@@ -183,5 +247,8 @@ function solve(input: string) {
 
 }
 
-solve(sample_input);
-solve(input);
+
+
+solve(enlarge_map(sample_input));
+solve(enlarge_map((input)));
+
