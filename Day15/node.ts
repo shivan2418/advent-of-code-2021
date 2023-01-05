@@ -59,19 +59,24 @@ export default class Node {
         return nodes[0];
     }
 
-    get_up(node_map:Map<[number,number],Node>):Node|undefined {
-        return node_map.get([this.x,this.y-1])
+    _make_key(mod_x=0,mod_y=0):string {
+        return `${this.x+mod_x}-${this.y+mod_y}`;
     }
 
-    get_down(node_map:Map<[number,number],Node>):Node|undefined {
-        return node_map.get([this.x,this.y+1])
+    get_up(node_map:Map<string,Node>):Node|undefined {
+        return node_map.get(this._make_key(0,-1));
     }
 
-    get_left(node_map:Map<[number,number],Node>):Node|undefined {
-        return node_map.get([this.x-1,this.y])
+    get_down(node_map:Map<string,Node>):Node|undefined {
+        return node_map.get(this._make_key(0,1))
+
     }
 
-    get_right(node_map:Map<[number,number],Node>):Node|undefined {
-        return node_map.get([this.x+1,this.y])
+    get_left(node_map:Map<string,Node>):Node|undefined {
+        return node_map.get(this._make_key(-1,0));
+    }
+
+    get_right(node_map:Map<string,Node>):Node|undefined {
+        return node_map.get(this._make_key(1,0));
     }
 }
