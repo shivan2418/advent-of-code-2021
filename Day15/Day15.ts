@@ -1,4 +1,5 @@
 import Node from './node';
+
 const _ = require('lodash');
 
 const sample_input = "1163751742\n" +
@@ -115,28 +116,20 @@ const input = "71359124119127989328713913228899415446452111122881839691915886655
     "2126356321322111185843117549923315199213385946175489294117624711949445499157452371358923199949713123";
 
 
-function get_value(char:number|string){
-    if (char>9) {
-        char = 1;
-    }
-    return char;
+function enlarge_map(input: string): string {
 
-}
-
-function enlarge_map(input:string) {
+    console.time('enlarge_map');
 
     let org_rows = input.split("\n");
-    let rows_side:string[][] = [];
-
-    let rows_down:string[][] = [];
-
+    let rows_side: string[][] = [];
+    let rows_down: string[][] = [];
 
     // pad to the side
     org_rows.forEach((row, i) => {
 
         let new_row = Array.from(row);
         let index = 0;
-        while (new_row.length < row.length*5) {
+        while (new_row.length < row.length * 5) {
 
             let char = new_row[index];
             let value = parseInt(char) + 1;
@@ -148,14 +141,14 @@ function enlarge_map(input:string) {
         }
 
         rows_side.push(new_row);
-        })
+    })
 
     // pad values down
-    let row_index =0;
-    let target_length = rows_side.length*5;
+    let row_index = 0;
+    let target_length = rows_side.length * 5;
     while (rows_side.length < target_length) {
 
-        let new_row:string[] = [];
+        let new_row: string[] = [];
         rows_side[row_index].forEach((char, i) => {
             let value = parseInt(char) + 1;
             if (value > 9) {
@@ -174,11 +167,15 @@ function enlarge_map(input:string) {
         output += row.join("") + "\n";
     })
 
+    console.timeEnd('enlarge_map');
+
     return output;
 
 }
 
 function parse_input(input: string): Node[] {
+
+    console.time("parse_input");
 
     let nodes: Node[] = [];
 
@@ -196,12 +193,12 @@ function parse_input(input: string): Node[] {
             x++;
         });
         y++;
-        x=0;
+        x = 0;
     });
 
     _.first(nodes)!.start = true;
-    _.first(nodes)!.cost=0;
-    _.first(nodes)!.visited=true;
+    _.first(nodes)!.cost = 0;
+    _.first(nodes)!.visited = true;
     _.last(nodes)!.end = true;
 
     // add adjacent nodes
@@ -212,11 +209,14 @@ function parse_input(input: string): Node[] {
         node.right = node.get_right(nodes);
     });
 
+    console.timeEnd("parse_input");
+
     return nodes;
 
 }
 
 function solve(input: string) {
+
 
     let nodes = parse_input(input);
     // start at the start node
@@ -234,9 +234,10 @@ function solve(input: string) {
             }
 
         })
-        current_node.visited=true;
+        current_node.visited = true;
         current_node = Node.get_next_node_to_visit(nodes)!;
-        if (current_node.end){
+
+        if (current_node.end) {
             break
         }
 
@@ -246,7 +247,6 @@ function solve(input: string) {
     console.log(end_node.get_distance_from_start());
 
 }
-
 
 
 solve(enlarge_map(sample_input));
