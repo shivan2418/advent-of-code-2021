@@ -179,6 +179,8 @@ function parse_input(input: string): Node[] {
 
     let nodes: Node[] = [];
 
+    let node_map = new Map<[number,number],Node>();
+
     let x = 0;
     let y = 0;
 
@@ -190,6 +192,7 @@ function parse_input(input: string): Node[] {
             let cost = parseInt(char);
             let node = new Node(x, y, cost);
             nodes.push(node);
+            node_map.set([x,y], node);
             x++;
         });
         y++;
@@ -203,10 +206,10 @@ function parse_input(input: string): Node[] {
 
     // add adjacent nodes
     nodes.forEach((node) => {
-        node.up = node.get_up(nodes);
-        node.down = node.get_down(nodes);
-        node.left = node.get_left(nodes);
-        node.right = node.get_right(nodes);
+        node.up = node.get_up(node_map);
+        node.down = node.get_down(node_map);
+        node.left = node.get_left(node_map);
+        node.right = node.get_right(node_map);
     });
 
     console.timeEnd("parse_input");

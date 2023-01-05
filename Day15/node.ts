@@ -59,23 +59,19 @@ export default class Node {
         return nodes[0];
     }
 
-    get_up(nodes:Node[]):Node|undefined {
-        return _find_node(this.x,this.y-1,nodes);
+    get_up(node_map:Map<[number,number],Node>):Node|undefined {
+        return node_map.get([this.x,this.y-1])
     }
 
-    get_down(nodes:Node[]):Node|undefined {
-        return _find_node(this.x,this.y+1,nodes);
+    get_down(node_map:Map<[number,number],Node>):Node|undefined {
+        return node_map.get([this.x,this.y+1])
     }
 
-    get_left(nodes:Node[]):Node|undefined {
-        return _find_node(this.x-1,this.y,nodes);
+    get_left(node_map:Map<[number,number],Node>):Node|undefined {
+        return node_map.get([this.x-1,this.y])
     }
 
-    get_right(nodes:Node[]):Node|undefined {
-        return _find_node(this.x+1,this.y,nodes);
+    get_right(node_map:Map<[number,number],Node>):Node|undefined {
+        return node_map.get([this.x+1,this.y])
     }
-}
-
-function _find_node(x:number,y:number,nodes:Node[]): Node|undefined {
-    return nodes.find( node => node.x===x && node.y===y);
 }
