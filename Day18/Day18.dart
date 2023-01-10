@@ -1551,17 +1551,17 @@ class NestedPair {
   late NestedPair left;
   late NestedPair right;
   late List<NestedPair> children;
-  late NestedPair? parent;
-  late List value;
+  NestedPair? parent = null;
+  List value;
 
   late int nested_inside_pairs = 0;
 
-  NestedPair(List value) {
+  NestedPair(this.value) {
     this.value = value;
     this.build_tree();
   }
 
-  NestedPair.parent(List value, NestedPair parent) {
+  NestedPair.parent(this.value, NestedPair parent) {
     this.value = value;
     this.parent = parent;
 
@@ -1579,6 +1579,10 @@ class NestedPair {
     return nested_inside;
   }
 
+  bool has_list_children(){
+    return this.value.any((element) => element is List);
+  }
+  
   void build_tree() {
     if (this.value.any((item) => item is List)) {
       List<NestedPair> children = [];
@@ -1592,8 +1596,6 @@ class NestedPair {
       });
       this.children = children;
       this.set_left_right(this.children);
-
-      this.nested_inside_pairs = get_nested_inside_pairs();
 
     }
   }
@@ -1630,6 +1632,10 @@ class NestedPair {
 
 NestedPair parse_input(List input) {
   NestedPair root = NestedPair(input);
+
+  root.nested_inside_pairs = root.get_nested_inside_pairs();
+
+
 
   return root;
 }
