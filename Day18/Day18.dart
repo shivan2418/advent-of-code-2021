@@ -1559,6 +1559,7 @@ class NestedPair {
   NestedPair(this.value) {
     this.value = value;
     this.build_tree();
+    this.nested_inside_pairs = get_nested_inside_pairs();
   }
 
   NestedPair.parent(this.value, NestedPair parent) {
@@ -1566,6 +1567,7 @@ class NestedPair {
     this.parent = parent;
 
     this.build_tree();
+    this.nested_inside_pairs = get_nested_inside_pairs();
   }
 
   int get_nested_inside_pairs(){
@@ -1628,6 +1630,16 @@ class NestedPair {
     }
     return child;
   }
+
+  void print_tree(){
+    print(this.children);
+  }
+
+  @override
+  String toString(){
+    return this.value.toString();
+  }
+
 }
 
 NestedPair parse_input(List input) {
@@ -1635,11 +1647,11 @@ NestedPair parse_input(List input) {
 
   root.nested_inside_pairs = root.get_nested_inside_pairs();
 
-
+  root.print_tree();
 
   return root;
 }
 
 void main() {
-  parse_input([[[0,[4,5]],[0,0]],[[[4,5],[2,6]],[9,5]]]);
+  parse_input([[[0,[4,5]],[0,0]],   [   [[4,5],[2,6]],[9,5]    ]     ]);
 }
