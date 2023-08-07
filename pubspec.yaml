@@ -1,7 +1,8 @@
 name: Advent_of_code_2021
 environment:
-  sdk: '>=2.18.0 <3.0.0'
+  sdk: '3.0.5'
 
 dependencies:
   html: ^0.15.1
   tuple: ^2.0.1
+
